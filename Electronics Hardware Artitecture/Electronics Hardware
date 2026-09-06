@@ -1,0 +1,65 @@
+## ⚡ Electronics & Hardware
+
+The Robodog uses a distributed electronics architecture to control locomotion, process sensor data, monitor environmental conditions, and communicate with the remote monitoring system.
+
+### 🧠 Controllers & Processing
+
+* **Raspberry Pi** – Main onboard computing, sensor processing, mapping, camera processing, and autonomous navigation
+* **ESP32** – Real-time control and interfacing with sensors/actuators
+* **PCA9685 PWM Driver** – Multi-channel servo control
+
+### 🦿 Actuation & Motion
+
+* **MG995 Servo Motors** – Leg joint actuation
+* **External Servo Power Supply** – Provides the high current required by multiple servos
+* **Power Distribution System** – Distributes regulated power to controllers, sensors, and actuators
+
+### 📡 Sensors & Perception
+
+* **LiDAR** – Mapping, localization, and obstacle detection
+* **Camera Module** – Visual surveillance and image acquisition
+* **Ultrasonic Sensors** – Short-range obstacle detection
+* **IMU** – Orientation, acceleration, and motion measurement
+* **GPS Module** – Outdoor positioning and location tracking
+* **PIR Sensor** – Motion and presence detection
+
+### 🌡️ Environmental Monitoring
+
+* **Temperature Sensor** – Ambient temperature measurement
+* **Humidity Sensor** – Relative humidity measurement
+* **Microphone / Sound Sensor** – Environmental and acoustic monitoring
+* **Gas Sensor** – Detection of selected gases and environmental hazards
+
+### 🔋 Power System
+
+The electronics are powered through a dedicated power-distribution architecture to prevent high-current actuators from overloading the low-power electronics.
+
+The power system is designed to provide separate, appropriate supplies for:
+
+```text id="5c9c4e"
+              Main Battery / Power Source
+                       │
+                Power Distribution
+                       │
+        ┌──────────────┼──────────────┐
+        │              │              │
+     Servos       Raspberry Pi       ESP32
+        │              │              │
+   MG995 Motors      Sensors       Control
+                       │
+              ┌────────┼────────┐
+              │        │        │
+            LiDAR    Camera   Environment
+```
+
+### 🔌 Electronics Integration
+
+All sensors and actuators are integrated through appropriate communication and control interfaces such as:
+
+* **PWM** – Servo motor control
+* **I²C** – Sensor and peripheral communication
+* **UART** – Serial communication with modules
+* **GPIO** – Digital sensors and control signals
+* **Wireless communication** – Remote telemetry and monitoring
+
+The electronics architecture is designed to be **modular**, allowing additional sensors, communication modules, and computing capabilities to be added as the Robodog evolves.
