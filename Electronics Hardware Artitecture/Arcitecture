@@ -1,0 +1,164 @@
+## 🔌 Electronics Architecture
+
+The Robodog follows a **distributed electronics architecture**, separating high-level computation, real-time control, sensing, actuation, power management, and communication. This improves reliability, reduces processing load on individual controllers, and allows the system to be expanded with additional sensors and modules.
+
+### 🧠 High-Level Architecture
+
+```text
+                         ROBODOG ELECTRONICS
+                                │
+                    ┌───────────┴───────────┐
+                    │                       │
+               POWER SYSTEM            COMMUNICATION
+                    │                       │
+          ┌─────────┴─────────┐       ┌─────┴─────┐
+          │                   │       │           │
+     Logic Power          Servo Power LoRa / Wi-Fi / RF
+          │                   │
+          │              Servo Motors
+          │
+    ┌─────┴───────────────────────────────┐
+    │          MAIN COMPUTING             │
+    │                                     │
+    │           Raspberry Pi              │
+    │                                     │
+    └───────────────┬─────────────────────┘
+                    │
+          High-Level Processing
+                    │
+       ┌────────────┼────────────┐
+       │            │            │
+      SLAM       Vision      Data Processing
+       │            │            │
+     LiDAR       Camera      Environment
+                              Monitoring
+                    │
+                    ▼
+              ┌───────────┐
+              │   ESP32   │
+              │           │
+              │ Real-Time │
+              │  Control  │
+              └─────┬─────┘
+                    │
+        ┌───────────┼───────────┐
+        │           │           │
+      PCA9685     Sensors    Actuators
+        │           │           │
+        │      ┌────┴────┐      │
+        │      │         │      │
+        │    IMU      Environmental
+        │              Sensors
+        │
+    MG995 Servos
+        │
+   Quadruped Legs
+```
+
+### 🖥️ Main Computing Layer
+
+**Raspberry Pi** acts as the high-level computing platform responsible for:
+
+* LiDAR data processing
+* SLAM and mapping
+* Camera processing
+* Sensor data management
+* Autonomous navigation
+* High-level decision making
+* Communication with the monitoring station
+
+### ⚙️ Real-Time Control Layer
+
+The **ESP32** handles time-critical hardware operations such as:
+
+* Servo control
+* Sensor interfacing
+* Real-time locomotion control
+* Reading digital and analog sensors
+* Communication with the Raspberry Pi
+
+A **PCA9685 PWM driver** provides multiple PWM channels for controlling the quadruped's servo motors.
+
+### 👁️ Perception & Sensor Layer
+
+The robot integrates multiple sensing systems:
+
+**Navigation & Perception**
+
+* LiDAR
+* Camera
+* Ultrasonic sensors
+* IMU
+* GPS
+
+**Environmental Monitoring**
+
+* Temperature
+* Humidity
+* Sound
+* Gas
+
+**Presence & Detection**
+
+* PIR sensor
+
+Sensor data is collected by the appropriate controller and passed to the processing layer for analysis and decision-making.
+
+### 🔋 Power Architecture
+
+The power system separates **high-current actuator power** from the **regulated logic and sensor power**.
+
+```text
+             Battery / Main Supply
+                     │
+              Power Distribution
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+     High-Current Rail      DC-DC Regulation
+          │                     │
+     Servo Motors          ┌────┴────┐
+                           │         │
+                       Raspberry   ESP32
+                           │         │
+                         Sensors   Control
+```
+
+This architecture prevents servo current spikes from directly affecting sensitive computing and sensing electronics.
+
+### 📡 Communication Architecture
+
+Communication between the major subsystems can use appropriate interfaces such as:
+
+* **I²C** – Sensors and peripheral devices
+* **UART** – Raspberry Pi ↔ ESP32 and communication modules
+* **PWM** – Servo motor control
+* **GPIO** – Digital sensors and control signals
+* **Wi-Fi** – High-bandwidth local communication
+* **LoRa** – Long-range low-bandwidth telemetry
+
+### 🔄 Data Flow
+
+```text
+Sensors
+   ↓
+ESP32 / Raspberry Pi
+   ↓
+Sensor Processing
+   ↓
+Localization + Mapping + Detection
+   ↓
+Navigation / Decision Making
+   ↓
+ESP32
+   ↓
+Servo Controller
+   ↓
+Quadruped Locomotion
+```
+
+The architecture allows the Robodog to operate as an integrated system where **sensing → processing → decision making → actuation** form a continuous feedback loop.
+
+### 🧩 Modular Architecture
+
+The electronics are designed to be **modular**, allowing individual subsystems to be developed, tested, replaced, or upgraded independently. This makes it easier to integrate additional sensors, improve computing capabilities, or introduce new communication and autonomous-navigation features in future iterations.
