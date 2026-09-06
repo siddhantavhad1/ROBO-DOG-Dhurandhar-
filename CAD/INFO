@@ -1,0 +1,48 @@
+🛠️ CAD & Mechanical Design
+
+The Robodog is being developed using 3D CAD modeling to design and refine the complete quadruped mechanical structure before fabrication.
+
+The CAD model includes:
+
+🐕 Complete quadruped body assembly
+🦿 Four-leg mechanical structure
+⚙️ Leg joints and servo mounting mechanisms
+🔩 Servo brackets and mechanical linkages
+🧩 Modular body and leg components
+📐 Dimensional and assembly constraints
+⚖️ Weight and mass distribution analysis
+🔧 Design for manufacturing and assembly
+🖨️ Components suitable for 3D printing / fabrication
+🔄 Iterative mechanical design and prototyping
+📐 CAD Development Workflow
+Concept Design
+      ↓
+3D CAD Modelling
+      ↓
+Individual Part Design
+      ↓
+Assembly
+      ↓
+Motion & Interference Checking
+      ↓
+Weight / Mass Analysis
+      ↓
+Design Optimization
+      ↓
+Prototype / Fabrication
+      ↓
+Testing & Iteration
+🧱 Modular Design
+
+The mechanical structure follows a modular approach, allowing individual components such as legs, brackets, joints, and body sections to be modified or replaced without redesigning the complete robot.
+
+This makes the platform easier to:
+
+Maintain
+Repair
+Upgrade
+Manufacture
+Experiment with different leg configurations
+📂 CAD Repository
+
+The repository will contain the CAD development files, including:
